@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+            padding: 20px;
+            background-color:palegoldenrod;
+        }
+        #keyboard {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            grid-gap: 10px;
+            margin: 10px;
+        }
+
+        .key {
+            width: 90;
+            background-color: lightgray;
+            border: 1px solid black;
+            border-radius: 30px;
+            padding: 10px;
+            text-align: center;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        #textarea {
+            width: 90%;
+            height: 100px;
+            padding: 20px;
+            margin: 10px;
+            font-size: 20px;
+            border-radius: 10px;
+            font-family: 'Times New Roman';
+        }
+    </style>
+</head>
+
+<body>
+    <textarea id="textarea"></textarea>
+    <div id="keyboard">
+        <div class="key">Q</div>
+        <div class="key">W</div>
+        <div class="key">E</div>
+        <div class="key">R</div>
+        <div class="key">T</div>
+        <div class="key">Y</div>
+        <div class="key">U</div>
+        <div class="key">I</div>
+        <div class="key">O</div>
+        <div class="key">P</div>
+        <div class="key">A</div>
+        <div class="key">S</div>
+        <div class="key">D</div>
+        <div class="key">F</div>
+        <div class="key">G</div>
+        <div class="key">H</div>
+        <div class="key">J</div>
+        <div class="key">K</div>
+        <div class="key">L</div>
+        <div class="key">;</div>
+        <div class="key">Z</div>
+        <div class="key">X</div>
+        <div class="key">C</div>
+        <div class="key">V</div>
+        <div class="key">B</div>
+        <div class="key">N</div>
+        <div class="key">M</div>
+        <div class="key">,</div>
+        <div class="key">.</div>
+        <div class="key">/</div>
+    </div>
+    
+    <script>
+
+        let textarea = document.getElementById("textarea");
+
+        let keys = document.getElementsByClassName("key");
+
+        for (let i = 0; i < keys.length; i++) {
+            keys[i].addEventListener("click", function () {
+                let key = this.innerText;
+
+                if (key) {
+                    textarea.value += key;
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

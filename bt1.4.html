@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Ứng dụng quy đổi nhiệt độ</h1>
+    <p>Nhập vào nhiệt độ bạn muốn quy đổi:</p>
+    <table>
+        <tr>
+            <td>Độ C:</td>
+            <td><input id="c" type="text" oninput="inputC()"></td>
+        </tr>
+        <tr>
+            <td>Độ F:</td>
+            <td><input id="f" type="text" oninput="inputF()"></td>
+        </tr>
+        <tr>
+            <td>Độ K:</td>
+            <td><input id="k" type="text" oninput="inputK()"></td>
+        </tr>
+    </table>
+    <script>
+        function cToF(c) {
+            return c * 9 / 5 + 32;
+        }
+        function cToK(c) {
+            return c + 273.15;
+        }
+
+        //dưới này có thể đổi từ f-k k-c k-f
+
+        // function fToC(f) {
+        //     return (f - 32) * 5 / 9;
+        // }
+        // function fToK(f) {
+        //     return (f + 459.67) * 5 / 9;
+        // }
+        // function kToC(k) {
+        //     return k - 273.15;
+        // }
+        // function kToF(k) {
+        //     return k * 9 / 5 - 459.67;
+        // }
+
+
+        // Hàm xử lý sự kiện nhập vào ô input C
+        function inputC() {
+            let c = document.getElementById("c").value;
+            if (isNaN(c)) {
+                alert("Vui lòng nhập vào một số!");
+                document.getElementById("f").value = "";
+                document.getElementById("k").value = "";
+                return;
+            }
+            let f = cToF(c);
+            let k = cToK(c);
+            document.getElementById("f").value = f;
+            document.getElementById("k").value = k;
+        }
+
+
+
+        // // Hàm xử lý sự kiện nhập vào ô input F
+        // function inputF() {
+        //     let f = document.getElementById("f").value;
+        //     if (isNaN(f)) {
+        //         alert("Vui lòng nhập vào một số!");
+        //         document.getElementById("c").value = "";
+        //         document.getElementById("k").value = "";
+        //         return;
+        //     }
+        //     let c = fToC(f);
+        //     let k = fToK(f);
+
+        //     document.getElementById("c").value = c;
+        //     document.getElementById("k").value = k;
+        // }
+        // // Hàm xử lý sự kiện nhập vào ô input K
+        // function inputK() {
+        //     let k = document.getElementById("k").value;
+        //     if (isNaN(k)) {
+        //         alert("Vui lòng nhập vào một số!");
+        //         document.getElementById("c").value = "";
+        //         document.getElementById("f").value = "";
+        //         return;
+        //     }
+        //     let c = kToC(k);
+        //     let f = kToF(k);
+
+        //     document.getElementById("c").value = c;
+        //     document.getElementById("f").value = f;
+        // }
+
+
+
+    </script>
+</body>
+
+</html>

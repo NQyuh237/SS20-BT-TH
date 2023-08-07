@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            padding: 20px;
+        }
+        #game {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 5px;
+            margin: 10px;
+        }
+
+        .card {
+            width: 350px;
+            height: 150px;
+            background-color: gray;
+            border: 1px solid black;
+            border-radius: 10px;
+            object-fit: cover;
+            position: relative;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        .card.flipped img {
+            display: block;
+        }
+
+        .card.matched {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="game">
+        <div class="card" data-image="1"><img src="img/11.jpg"></div>
+        <div class="card" data-image="2"><img src="img/22.jpg"></div>
+        <div class="card" data-image="3"><img src="img/33.jpg"></div>
+        <div class="card" data-image="4"><img src="img/44.jpg"></div>
+        <div class="card" data-image="5"><img src="img/55.jpg"></div>
+        <div class="card" data-image="6"><img src="img/66.jpg"></div>
+        <div class="card" data-image="7"><img src="img/7.jpg"></div>
+        <div class="card" data-image="8"><img src="img/3.jpg"></div>
+        <div class="card" data-image="1"><img src="img/11.jpg"></div>
+        <div class="card" data-image="2"><img src="img/22.jpg"></div>
+        <div class="card" data-image="3"><img src="img/33.jpg"></div>
+        <div class="card" data-image="4"><img src="img/44.jpg"></div>
+        <div class="card" data-image="5"><img src="img/55.jpg"></div>
+        <div class="card" data-image="6"><img src="img/66.jpg"></div>
+        <div class="card" data-image="7"><img src="img/7.jpg"></div>
+        <div class="card" data-image="8"><img src="img/3.jpg"></div>
+    </div>
+    <script>
+        let game = document.getElementById("game");
+        let cards = document.getElementsByClassName("card");
+        function shuffleCards() {
+            for (let i = cards.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                game.insertBefore(cards[j], cards[i]);
+                game.insertBefore(cards[i], cards[j]);
+            }
+        }
+
+        function flipCard(card) {
+            card.classList.add("flipped");
+        }
+
+        function unflipCard(card) {
+            card.classList.remove("flipped");
+        }
+
+        function matchCards(card1, card2) {
+            card1.classList.add("matched");
+            card2.classList.add("matched");
+        }
+
+        function checkWin() {
+            let matchedCards = document.getElementsByClassName("matched");
+            if (matchedCards.length == cards.length) {
+                alert("Chúc mừng bạn");
+            }
+        }
+
+        function initGame() {
+            shuffleCards();
+            let firstCard = null;
+            let secondCard = null;
+            let lock = false;
+
+            for (let i = 0; i < cards.length; i++) {
+                cards[i].addEventListener("click", function () {
+                    if (this.classList.contains("flipped") || this.classList.contains("matched") || lock) {
+                        return;
+                    }
+
+                    if (!firstCard) {
+                        flipCard(this);
+                        firstCard = this;
+                    }
+                    else if (!secondCard) {
+                        flipCard(this);
+                        secondCard = this;
+
+                        lock = true;
+
+                        let image1 = firstCard.getAttribute("data-image");
+                        let image2 = secondCard.getAttribute("data-image");
+
+                        if (image1 == image2) {
+                            matchCards(firstCard, secondCard);
+                            firstCard = null;
+                            secondCard = null;
+                            lock = false;
+                            checkWin();
+                        }
+                        else {
+                            setTimeout(function () {
+                                unflipCard(firstCard);
+                                unflipCard(secondCard);
+                                firstCard = null;
+                                secondCard = null;
+                                lock = false;
+                            }, 1000);
+                        }
+                    }
+                });
+            }
+        }
+        initGame();
+    </script>
+</body>
+
+</html>
